@@ -10,17 +10,25 @@ source:
 
 build:
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  # conda 4.4+ can use this
+  requires_features:
+    blas: {{ blas_impl }}
+  # this is for conda 4.3 and below
+  features:
+    - nomkl    # [x86 and blas_impl != 'mkl']
 
 requirements:
   build:
-    - python
-    - pip
-    - numpy 1.11.*
-  run:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
+    - numpy
     - python
     - setuptools
-    - numpy >=1.11
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
