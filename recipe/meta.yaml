@@ -10,17 +10,26 @@ source:
   sha256: 8c57759bbd64fb81d985e54772191b71e8b63d58843d64933009521d2dddfd2f
 
 build:
-  number: 0
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  number: 1
+  # conda 4.4+ can use this
+  requires_features:
+    blas: {{ blas_impl }}
+  # this is for conda 4.3 and below
+  features:
+    - nomkl    # [x86 and blas_impl != 'mkl']
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
+    - numpy
     - python
     - setuptools
-    - numpy x.x
   run:
     - python
-    - numpy x.x
+    - {{ pin_compatible('numpy') }}
 
 test:
   requires:
