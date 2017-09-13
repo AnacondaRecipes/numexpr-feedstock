@@ -16,6 +16,7 @@ build:
   # this is for conda 4.3 and below
   features:
     - nomkl    # [x86 and blas_impl != 'mkl']
+  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
