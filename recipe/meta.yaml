@@ -25,6 +25,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
+    - openblas              # [blas_impl == 'openblas']
     - numpy
     - python
     - setuptools
