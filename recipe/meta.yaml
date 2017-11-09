@@ -10,7 +10,7 @@ source:
   sha256: 8c57759bbd64fb81d985e54772191b71e8b63d58843d64933009521d2dddfd2f
 
 build:
-  number: 1
+  number: 2
   # conda 4.4+ can use this
   skip: True  # [blas_impl == 'openblas' and win]
   requires_features:
@@ -18,7 +18,10 @@ build:
   # this is for conda 4.3 and below
   features:
     - nomkl    # [x86 and blas_impl != 'mkl']
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  script:
+    - cp $PREFIX/site.cfg site.cfg  # [unix]
+    - cp %PREFIX%\\site.cfg site.cfg  # [win]
+    - python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
