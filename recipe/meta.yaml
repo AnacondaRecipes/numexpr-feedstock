@@ -1,4 +1,4 @@
-{% set version="2.6.2" %}
+{% set version = "2.6.4" %}
 
 package:
   name: numexpr
@@ -7,10 +7,10 @@ package:
 source:
   fn: numexpr-{{ version }}.tar.gz
   url: https://github.com/pydata/numexpr/archive/v{{ version }}.tar.gz
-  sha256: 8c57759bbd64fb81d985e54772191b71e8b63d58843d64933009521d2dddfd2f
+  sha256: 049da1c07bd62d2aba29887130ccc9aff9b90962cb779a7b7ddc15e580368fba
 
 build:
-  number: 2
+  number: 0
   # conda 4.4+ can use this
   skip: True  # [blas_impl == 'openblas' and win]
   requires_features:
