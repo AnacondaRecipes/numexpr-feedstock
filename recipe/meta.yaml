@@ -29,7 +29,7 @@ requirements:
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas']
-    - nomkl  # [blas_impl == 'openblas']
+    - nomkl  # [x86 and blas_impl == 'openblas']
     - numpy
     - python
     - setuptools
@@ -40,7 +40,7 @@ requirements:
 test:
   requires:
     - setuptools
-    - nomkl  # [blas_impl == 'openblas']
+    - nomkl  # [x86 and blas_impl == 'openblas']
   imports:
     - numexpr
     - numexpr.interpreter
