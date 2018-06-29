@@ -5,22 +5,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
-  sha256: f8ad8014085628eab91bc82fb9d10cf9ab8e04ede4884e4a1061445d395b36bb
+# Weird, dobuled up line endings cause this to fail on Windows:
+#  url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
+#  sha256: f8ad8014085628eab91bc82fb9d10cf9ab8e04ede4884e4a1061445d395b36bb
+  git_url: https://github.com/pydata/numexpr.git
+  git_tag: v{{ version }}
 
 build:
   number: 0
-  # conda 4.4+ can use this
   skip: True  # [blas_impl == 'openblas' and win]
-  requires_features:
-    blas: {{ blas_impl }}
-  # this is for conda 4.3 and below
-  features:
-    - nomkl    # [x86 and blas_impl != 'mkl']
   script:
     - cp $PREFIX/site.cfg site.cfg  # [unix]
-    - cp %PREFIX%\\site.cfg site.cfg  # [win]
-    - python setup.py install --single-version-externally-managed --record=record.txt
+    - copy %PREFIX%\\site.cfg site.cfg  # [win]
+    - dos2unix numexpr/*.py
+    - dos2unix numexpr/tests/*.py
+    - {{PYTHON}} setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
@@ -44,9 +43,6 @@ test:
   imports:
     - numexpr
     - numexpr.interpreter
-  commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://github.com/pydata/numexpr
