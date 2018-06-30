@@ -17,8 +17,8 @@ build:
   script:
     - cp $PREFIX/site.cfg site.cfg  # [unix]
     - copy %PREFIX%\\site.cfg site.cfg  # [win]
-    - dos2unix numexpr/*.py
-    - dos2unix numexpr/tests/*.py
+    - dos2unix numexpr/*.py  # [win]
+    - dos2unix numexpr/tests/*.py  # [win]
     - {{PYTHON}} setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
