@@ -26,7 +26,7 @@ requirements:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas']
     - nomkl  # [x86 and blas_impl == 'openblas']
-    - numpy
+    - numpy 1.11.*
     - python
     - setuptools
   run:
