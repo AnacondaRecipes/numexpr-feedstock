@@ -7,9 +7,6 @@ package:
 source:
   url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
   sha256: ee8bc7201aa2f1962c67d27c326a11eef9df887d7b87b1278a1d4e722bf44375
-  patches:
-    # seems to trip up py37 on windows only?
-    - 0001-remove-line-continuation-characters-in-cpuinfo.patch
 
 build:
   number: 0
