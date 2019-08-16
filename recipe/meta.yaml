@@ -1,4 +1,4 @@
-{% set version = "2.6.8" %}
+{% set version = "2.7.0" %}
 
 package:
   name: numexpr
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
-  sha256: ee8bc7201aa2f1962c67d27c326a11eef9df887d7b87b1278a1d4e722bf44375
+  sha256: 37324b5981b8962102bdc8640c4f05f5589da5d1df2702418783085cb78ca217
 
 build:
   number: 0
