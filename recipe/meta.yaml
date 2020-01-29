@@ -25,7 +25,7 @@ requirements:
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas']
-    - numpy-devel
+    - numpy-devel {{ numpy }}
     - python
     - setuptools
   run:
