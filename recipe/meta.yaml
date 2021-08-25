@@ -12,10 +12,6 @@ build:
   number: 1
   skip: True  # [blas_impl == 'openblas' and win]
   script:
-    - cp $PREFIX/site.cfg site.cfg  # [unix]
-    - copy %PREFIX%\\site.cfg site.cfg  # [win]
-    - dos2unix numexpr/*.py  # [win]
-    - dos2unix numexpr/tests/*.py  # [win]
     - "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
@@ -23,14 +19,15 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl']
-    - openblas-devel {{ openblas }}  # [blas_impl == 'openblas']
-    - numpy-devel {{ numpy }}
+    - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl' and x86]
+    - openblas-devel {{ openblas }}  # [blas_impl == 'openblas' and x86]
+    - numpy
     - python
     - pip
   run:
     - python
-
+    - setuptools
+    - {{ pin_compatible('numpy') }}
 test:
   requires:
     - setuptools
