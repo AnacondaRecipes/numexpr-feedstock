@@ -9,8 +9,9 @@ source:
   sha256: cd779aa44dd986c4ef10163519239602b027be06a527946656207acf1f58113b
 
 build:
-  number: 1
+  number: 0
   skip: True  # [blas_impl == 'openblas' and win]
+  skip: True  # [py<36]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps -vv"
 
@@ -24,14 +25,18 @@ requirements:
     - numpy
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
-    - setuptools
+    - packaging
     - {{ pin_compatible('numpy') }}
 test:
   requires:
-    - setuptools
     - nomkl  # [x86 and blas_impl == 'openblas']
+    - pip
+  commands:
+    - pip check
   imports:
     - numexpr
     - numexpr.interpreter
@@ -39,6 +44,7 @@ test:
 about:
   home: https://github.com/pydata/numexpr
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
   summary: 'Fast numerical expression evaluator for NumPy.'
   description: |
