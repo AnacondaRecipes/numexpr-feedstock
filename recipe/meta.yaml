@@ -1,4 +1,4 @@
-{% set version = "2.7.3" %}
+{% set version = "2.8.1" %}
 
 package:
   name: numexpr
@@ -6,11 +6,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
-  sha256: 43616529f9b7d1afc83386f943dc66c4da5e052f00217ba7e3ad8dd1b5f3a825
+  sha256: cd779aa44dd986c4ef10163519239602b027be06a527946656207acf1f58113b
 
 build:
-  number: 1
+  number: 0
   skip: True  # [blas_impl == 'openblas' and win]
+  skip: True  # [py<36]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps -vv"
 
@@ -24,14 +25,18 @@ requirements:
     - numpy
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
-    - setuptools
+    - packaging
     - {{ pin_compatible('numpy') }}
 test:
   requires:
-    - setuptools
     - nomkl  # [x86 and blas_impl == 'openblas']
+    - pip
+  commands:
+    - pip check
   imports:
     - numexpr
     - numexpr.interpreter
@@ -39,6 +44,7 @@ test:
 about:
   home: https://github.com/pydata/numexpr
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
   summary: 'Fast numerical expression evaluator for NumPy.'
   description: |
