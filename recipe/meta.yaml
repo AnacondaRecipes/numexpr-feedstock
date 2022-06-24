@@ -9,7 +9,7 @@ source:
   sha256: cd779aa44dd986c4ef10163519239602b027be06a527946656207acf1f58113b
 
 build:
-  number: 1
+  number: 2
   skip: True  # [blas_impl == 'openblas' and win]
   skip: True  # [py<36]
   script:
