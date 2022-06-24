@@ -1,4 +1,4 @@
 libopenblas:
   - 0.3.20
-openblas_devel:
+openblas:
   - 0.3.20
