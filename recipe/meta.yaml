@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
-  sha256: 9fec076b76c90a5f3929373f548834bb203c6d23a81a895e60d0fe9cca075e99
+  sha256: cb647c9d9c785dae0759bf6c875cde2bec472b5c3f7a6015734b161ae766d141
 
 build:
   number: 0
