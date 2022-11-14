@@ -2,3 +2,5 @@ libopenblas:
   - 0.3.20
 openblas:
   - 0.3.20
+numpy:
+  - 1.23.3
