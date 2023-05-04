@@ -12,7 +12,7 @@ build:
   number: 1
   skip: True  # [blas_impl == 'openblas' and win]
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
