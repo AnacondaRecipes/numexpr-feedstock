@@ -9,10 +9,10 @@ source:
   sha256: d5432537418d18691b9115d615d6daa17ee8275baef3edf1afbbf8bc69806147 
 
 build:
-  number: 0
+  number: 1
   skip: True  # [blas_impl == 'openblas' and win]
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
@@ -21,14 +21,13 @@ requirements:
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl' and x86]
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas' and x86]
-    - numpy
+    - numpy {{ numpy }}
     - python
     - pip
     - setuptools
     - wheel
   run:
     - python
-    - packaging
     - {{ pin_compatible('numpy') }}
 test:
   requires:
