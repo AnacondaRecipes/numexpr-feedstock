@@ -1,17 +1,18 @@
-{% set version = "2.8.4" %}
+{% set name = "numexpr" %}
+{% set version = "2.8.7" %}
 
 package:
-  name: numexpr
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/n/numexpr/numexpr-{{ version }}.tar.gz
-  sha256: d5432537418d18691b9115d615d6daa17ee8275baef3edf1afbbf8bc69806147 
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 596eeb3bbfebc912f4b6eaaf842b61ba722cebdb8bc42dfefa657d3a74953849
 
 build:
-  number: 1
+  number: 0
   skip: True  # [blas_impl == 'openblas' and win]
-  skip: True  # [py<37]
+  skip: True  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -29,22 +30,22 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
+
 test:
+  # imports are included to run_test.py
   requires:
     - nomkl  # [x86 and blas_impl == 'openblas']
     - pip
+    - pytest
   commands:
     - pip check
-  imports:
-    - numexpr
-    - numexpr.interpreter
 
 about:
   home: https://github.com/pydata/numexpr
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: 'Fast numerical expression evaluator for NumPy.'
+  summary: Fast numerical expression evaluator for NumPy
   description: |
     Numexpr is a fast numerical expression evaluator for NumPy. With it,
     expressions that operate on arrays (like "3*a+4*b") are accelerated and use
