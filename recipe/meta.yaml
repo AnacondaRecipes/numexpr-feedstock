@@ -29,7 +29,7 @@ requirements:
     - wheel
   run:
     - python
-    - numpy>=1.23.0
+    - numpy >=1.23.0
 
 test:
   # imports are included to run_test.py
