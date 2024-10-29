@@ -22,14 +22,14 @@ requirements:
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl' and x86]
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas' and x86]
-    - numpy {{ numpy }}
+    - numpy >=2.0.0
     - python
     - pip
     - setuptools
     - wheel
   run:
     - python
-    - {{ pin_compatible('numpy') }}
+    - numpy>=1.23.0
 
 test:
   # imports are included to run_test.py
