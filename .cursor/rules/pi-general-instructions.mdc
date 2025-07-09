@@ -1,0 +1,28 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+We're updating a conda recipe, which is in the `recipe/` directory of the feedstock git repository in this workspace.
+However, the recipe is for a package whose source code is in another git repository, which we call upstream.
+We will usually not build the package from the git source, unless the recipe explicitly says so, but from a release tarball.
+This release tarball will often come from PyPI, but not always.
+
+We're updating an Anaconda recipe, not a conda-forge recipe, thus:
+- Never search for dependencies in conda-forge.
+- Never use a conda-forge package to satisfy a dependency.
+
+Refer to https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html for `meta.yaml` syntax.
+
+Always use the `conda_build` MCP tool to build the package, never run `conda build` manually even for testing.
+
+When creating, modifying, updating or iterating on a patch, do not ever directly edit it under any circumstance. Always use the [pi-patch.mdc](mdc:.cursor/rules/pi-patch.mdc) rule instead.
+
+If a package is not available in the Anaconda repositories:
+- If the package name contains underscores "_" try replacing them with dashes "-", and vice-versa.
+- If it's still not found then abort everything and let the user know in your response in the chat window.
+
+Process to determine whether to consider requirements.txt when determining dependency changes:
+1. If there is no diff for requirements.txt, do not consider it.
+2. If there is a diff for requirements.txt, check out the version to be updated to in the local repository, and analyse the setup.py, setup.cfg, and pyproject.toml, as well as the diffs of those files, to determine whether it is used as a source of dependencies.

@@ -1,19 +1,21 @@
 {% set name = "numexpr" %}
-{% set version = "2.10.1" %}
+{% set version = "2.11.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9bba99d354a65f1a008ab8b87f07d84404c668e66bab624df5b6b5373403cf81
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 75b2c01a4eda2e7c357bc67a3f5c3dd76506c15b5fd4dc42845ef2e182181bad
 
 build:
   number: 0
-  skip: True  # [blas_impl == 'openblas' and win]
-  skip: True  # [py<39]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [blas_impl == 'openblas' and win]
+  skip: true  # [py<310]
+  script:
+    - sed -i.bak 's/^license = "MIT"/license = { text = "MIT" }/' pyproject.toml
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
@@ -22,7 +24,7 @@ requirements:
   host:
     - mkl-devel  {{ mkl }}  # [blas_impl == 'mkl' and x86]
     - openblas-devel {{ openblas }}  # [blas_impl == 'openblas' and x86]
-    - numpy >=2.0.0
+    - numpy {{ numpy}}
     - python
     - pip
     - setuptools

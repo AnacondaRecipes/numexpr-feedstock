@@ -1,0 +1,22 @@
+---
+description: Use these steps when creating, modifying, updating or iterating on a patch to address a build or test issue
+globs:
+alwaysApply: false
+---
+1. Create a `patches` directory adjacent to `meta.yaml` under the `recipe` directory in the feedstock
+2. Copy the clone of the upstream repository from its location in the local filesystem (check the scratchpad if you don't remember it) to the temporary work directory where the scratchpad is
+3. If you're modifying, updating or iterating on a patch then apply the previous version here
+4. Make your changes
+5. Create a file with a multi-line git commit message explaining what you did and why
+6. Commit the changes using `git commit -F` and the commit message above
+7. Run `git format-patch -M -C -C -1` to create the patch
+8. Copy the patch from the upstream repository into the `patches` directory you created above
+9. Add the patch to the source section of `recipe/meta.yaml` in the feedstock.
+10. CRITICAL: ALWAYS prepend `patches/` to the path of the patch, for example:
+```yaml
+source:
+  patches:
+    - patches/filename.patch
+```
+11. When iterating on the patch, or when creating a new patch, repeat steps 3 to 8 every time. Patches apply on top of each other, so the previous patches must be applied before creating new ones
+12. Once it builds successfully, delete the copied repository, not the original clone
