@@ -1,0 +1,11 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+Your temporary work directory is at `.cursor/tmp` in the feedstock repository.
+
+When you need to download a file to work on it, or any work which would generate temporary files, always do it in the temporary directory.
+
+Always write down all you do, i.e., all your actions and thoughts, your planned future actions, as well as the response from MCP tools, in a Markdown file called `scratchpad.md` in the temporary directory.
+Consult your scratchpad periodically to remind you of what you did previously and what happened.

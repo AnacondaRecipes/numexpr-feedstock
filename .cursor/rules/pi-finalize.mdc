@@ -1,0 +1,15 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+1. Create an entry in `worklog.md` in the `.cursor` directory
+    - Create a headline with:
+        - The date in ISO format
+        - The PI Cursor version string in `.cursor/rules/VERSION`
+        - The versions of the package we're updating from and to
+    - Summarize the important points of `scratchpad.md`
+    - Do not mention links to files on the local system, these are transient and will disappear
+    - Do not repeat the steps from the rules you used, these are known
+
+2. Delete the `.cursor/tmp` directory in the feedstock repository.

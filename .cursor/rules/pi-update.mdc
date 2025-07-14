@@ -1,0 +1,26 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+Always use the rules [pi-general-instructions.mdc](mdc:.cursor/rules/pi-general-instructions.mdc) and [pi-work-hygiene.mdc](mdc:.cursor/rules/pi-work-hygiene.mdc)
+
+You will update this recipe to the version requested by the user. The main file to update is @recipe/meta.yaml, but consider any file in @recipe if necessary.
+
+Follow this process:
+  1. Use the `prepare_recipe_update` MCP tool
+  2. Write the location of the cloned upstream repository to the scratchpad in order to remember it
+  3. Update the recipe according to the output of CRM
+  4. Use the `get_complete_git_picture` MCP tool
+  5. Update the recipe according to the output of `get_complete_git_picture`
+  6. If any dependencies are added or version constraints of existing dependencies are changed, check that those dependencies or versions are available using the `search_conda_package` MCP tool.
+  7. Use the `conda_build` MCP tool
+  8. Fix any issue you find and iterate running the `conda_build` MCP tool until the build is successful or you're blocked
+  9. If tests are automatically skipped because of missing optional dependencies, then add the dependencies to test requirements
+  10. If tests fail:
+      - Try to fix them by adding dependencies or creating/modifying a patch
+      - If you can't fix them then skip them
+  11. If you need to create, modify, update or iterate on a patch then use the [pi-patch.mdc](mdc:.cursor/rules/pi-patch.mdc) rule
+  12. Before you finish, check in your scratchpad for planned actions you may have forgotten about
+  13. Review the final recipe, check if all your changes make sense and if anything can be improved
+  14. At the end, explain what you've done and why
