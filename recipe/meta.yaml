@@ -10,8 +10,7 @@ source:
   sha256: 4be00b1086c7b7a5c32e31558122b7b80243fe098579b170967da83f3152b48b
 
 build:
-  number: 0
-  skip: true  # [blas_impl == 'openblas' and win]
+  number: 1
   skip: true  # [py<310]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
