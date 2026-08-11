@@ -1,5 +1,5 @@
 {% set name = "numexpr" %}
-{% set version = "2.14.1" %}
+{% set version = "2.14.2" %}
 
 package:
   name: {{ name }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4be00b1086c7b7a5c32e31558122b7b80243fe098579b170967da83f3152b48b
+  sha256: e7144e83ea9e581f2273e0304f15836736c4e470e2bd2e378ce617662a1ca278
 
 build:
-  number: 1
-  skip: true  # [py<310]
+  number: 0
+  skip: true  # [py<311]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -27,9 +27,11 @@ requirements:
     - python
     - pip
     - setuptools >=77.0.0
+    - numpy >=2.0.0
   run:
     - python
     - numpy >=1.23.0
+    - {{ pin_compatible('numpy') }}
 
 test:
   # imports are included to run_test.py
